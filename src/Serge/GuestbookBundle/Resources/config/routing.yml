@@ -1,3 +1,7 @@
 guestbook_homepage:
     pattern:  /hello/{name}
-    defaults: { _controller: GuestbookBundle:Default:index }
+    defaults: { _controller: GuestbookBundle:Entry:index }
+
+guestbook_routing:
+    resource: "@GuestbookBundle/Resources/config/routing/entry.yml"
+    prefix:   /book
