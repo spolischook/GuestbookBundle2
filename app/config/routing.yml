@@ -2,6 +2,9 @@ guestbook:
     resource: "@GuestbookBundle/Resources/config/routing.yml"
     prefix:   /
 
+user_routing:
+    resource: "@UserBundle/Controller"
+    type: annotation
 # Internal routing configuration to handle ESI
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
