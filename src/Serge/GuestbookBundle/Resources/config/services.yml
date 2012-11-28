@@ -1,6 +1,6 @@
 parameters:
 #    guestbook.example.class: Serge\GuestbookBundle\Example
-    guestbook.number.page: 3
+    guestbook.number.page: 10
 
 services:
 #    guestbook.example:
