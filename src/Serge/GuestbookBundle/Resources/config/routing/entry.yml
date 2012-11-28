@@ -1,6 +1,8 @@
 entry:
-    pattern:  /
-    defaults: { _controller: "GuestbookBundle:Entry:index" }
+    pattern:  /{page}
+    defaults: { _controller: "GuestbookBundle:Entry:index", page: 1 }
+    requirements:
+        page:  \d+
 
 entry_show:
     pattern:  /{id}/show
