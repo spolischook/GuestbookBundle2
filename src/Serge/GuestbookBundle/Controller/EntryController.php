@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Serge\GuestbookBundle\Entity\Entry;
 use Serge\GuestbookBundle\Form\EntryType;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\View\TwitterBootstrapView;
+
 /**
  * Entry controller.
  *
@@ -18,14 +22,28 @@ class EntryController extends Controller
      * Lists all Entry entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('GuestbookBundle:Entry')->findAll();
+        $adapter = new ArrayAdapter($entities);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage($this->container->getParameter('guestbook.number.page'));
+        try {
+            $pagerfanta->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException('Illegal page');
+        }
+
+
+        $entity = new Entry();
+        $form   = $this->createForm(new EntryType(), $entity);
 
         return $this->render('GuestbookBundle:Entry:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagerfanta->getCurrentPageResults(),
+            'form' => $form->createView(),
+            'my_pager' => $pagerfanta,
         ));
     }
 
@@ -80,7 +98,7 @@ class EntryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('entry_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('entry', array('id' => $entity->getId())));
         }
 
         return $this->render('GuestbookBundle:Entry:new.html.twig', array(
