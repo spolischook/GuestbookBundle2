@@ -10,7 +10,7 @@ use Serge\GuestbookBundle\Form\EntryType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\View\TwitterBootstrapView;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Entry controller.
@@ -74,6 +74,10 @@ class EntryController extends Controller
      */
     public function newAction()
     {
+        $securityContext = $this->container->get("security.context");
+        if (!$securityContext->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Only Admin may to create the entry!');
+        }
         $entity = new Entry();
         $form   = $this->createForm(new EntryType(), $entity);
 
