@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Serge\GuestbookBundle\Entity\Entry;
 
-class LoadData
+class LoadData implements  FixtureInterface
 {
 /**
 * {@inheritDoc}
