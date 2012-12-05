@@ -37,6 +37,8 @@ class User implements AdvancedUserInterface, Serializable
      */
     private $password;
 
+    private $plainPassword;
+
     /**
      * @var string
      *
@@ -165,7 +167,7 @@ class User implements AdvancedUserInterface, Serializable
     }
 
     /**
-     * Removes sensitive data from the user.
+         * Removes sensitive data from the user.
      *
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
@@ -174,7 +176,7 @@ class User implements AdvancedUserInterface, Serializable
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->setPlainPassword(null);
     }
 
     /**
@@ -296,5 +298,15 @@ class User implements AdvancedUserInterface, Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 }
