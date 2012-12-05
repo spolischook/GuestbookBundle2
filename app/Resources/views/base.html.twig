@@ -72,6 +72,13 @@
                 </div>
             </div>
         </div>
+        {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashbag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="container">
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}

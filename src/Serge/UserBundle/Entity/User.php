@@ -5,12 +5,16 @@ namespace Serge\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Serializable;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Serge\UserBundle\Entity\UserRepository")
+ * @UniqueEntity(fields="username", message="That username is taken!")
+ * @UniqueEntity(fields="email", message="That email is taken!")
  */
 class User implements AdvancedUserInterface, Serializable
 {
@@ -27,6 +31,7 @@ class User implements AdvancedUserInterface, Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
+     * @Assert\NotBlank(message="Please, put your username!")
      */
     private $username;
 
