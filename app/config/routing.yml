@@ -9,3 +9,8 @@ user_routing:
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
+
+shop_routing:
+    resource: "@ShopBundle/Controller"
+    type: annotation
+    prefix:   /shop

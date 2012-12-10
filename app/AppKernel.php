@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Serge\GuestbookBundle\GuestbookBundle(),
             new Serge\UserBundle\UserBundle(),
+            new Serge\ShopBundle\ShopBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
