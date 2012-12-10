@@ -1,0 +1,3 @@
+services:
+    response:
+        class: Symfony\Component\HttpFoundation\Response
